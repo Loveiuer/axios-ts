@@ -14,7 +14,7 @@ export type Method =
   | 'patch'
   | 'PACTH'
 
-export type ParamsType = Record<string, any> | URLSearchParams
+export type ParamsType = any
 export type HeadersType = Record<string, any>
 
 export interface AxiosRequestConfig {
@@ -48,7 +48,7 @@ export interface AxiosResponse<T = any> {
   request: XMLHttpRequest
 }
 
-export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {}
+export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> { }
 
 export interface AxiosError extends Error {
   isAxiosError: boolean
@@ -95,7 +95,7 @@ export interface AxiosStatic extends AxiosInstance {
 }
 
 export interface AxiosClassStatic {
-  new (config: AxiosRequestConfig): Axios
+  new(config: AxiosRequestConfig): Axios
 }
 
 export interface AxiosInterceptorManager<T> {
@@ -141,7 +141,7 @@ export interface CancelTokenSource {
 }
 
 export interface CancelTokenStatic {
-  new (executor: CancelExecutor): CancelToken
+  new(executor: CancelExecutor): CancelToken
 
   source(): CancelTokenSource
 }
@@ -151,7 +151,7 @@ export interface Cancel {
 }
 
 export interface CancelStatic {
-  new (message?: string): Cancel
+  new(message?: string): Cancel
 }
 
 export interface AxiosBasicCredentials {

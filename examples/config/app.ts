@@ -1,4 +1,5 @@
 import axios, { AxiosTransformer } from '../../src/index'
+// import axios from 'axios'
 import qs from 'qs'
 
 // axios.defaults.headers.common['test2'] = 123
@@ -58,14 +59,22 @@ import qs from 'qs'
 // }).then((res) => {
 //     console.log(res.data)
 // })
+// console.log('default', axios.defaults);
+
+// axios.interceptors.request.use(() => {
+//     return {
+//         url: '/config/post',
+//         method: 'POST',
+//         data: { b: 1 },
+//         headers: {}
+//     }
+// })
 
 axios({
     url: '/config/post',
     method: 'post',
-    data: { a: 1 },
     headers: {
-        test: '321'
+        'content-type': 'application/json'
     }
-}).then((res) => {
-    console.log(res.data)
 })
+

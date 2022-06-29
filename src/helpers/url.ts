@@ -1,4 +1,3 @@
-import { url } from 'inspector'
 import { ParamsType } from '../types'
 import { isDate, isPlainObject, isURLSearchParams } from '../utils'
 
@@ -34,7 +33,7 @@ export function buildURL(
     const parts: string[] = []
     Object.keys(params).forEach(key => {
       const val = params[key]
-      if (val === null || typeof val === undefined) {
+      if (val === null || typeof val === 'undefined') {
         return
       }
       let values: any[] = []
@@ -76,6 +75,7 @@ export function combineURL(baseURL: string, relativeURL?: string): string {
 
 const urlParsingNode = document.createElement('a')
 const currentOrigin = resolveURL(window.location.href)
+
 export function isURLSameOrigin(requestURL: string): boolean {
   const parsedOrigin = resolveURL(requestURL)
   return !!(

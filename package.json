@@ -1,18 +1,18 @@
 {
-  "name": "axios-ts",
-  "version": "0.0.0",
+  "name": "@loveiu/axios-ts",
+  "version": "0.1.3",
   "description": "",
   "keywords": [],
-  "main": "dist/axios-ts.umd.js",
-  "module": "dist/axios-ts.es5.js",
-  "typings": "dist/types/axios-ts.d.ts",
+  "main": "dist/axios.umd.js",
+  "module": "dist/axios.es5.js",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
   "author": "liwanbin <2285443668@qq.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Loveiuer/axios-ts"
   },
   "license": "MIT",
   "engines": {
@@ -22,7 +22,7 @@
     "dev": "node examples/server.js",
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --theme minimal --entryPoints ./src",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
@@ -33,7 +33,9 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "prepub": "npm run test:prod && npm run build",
+    "pub": "sh release.sh"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
@@ -50,8 +52,8 @@
     "transform": {
       ".(ts|tsx)": "ts-jest"
     },
-    "testEnvironment": "node",
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testEnvironment": "jsdom",
+    "testRegex": "/test/.*\\.(test|spec)\\.(ts)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -70,8 +72,13 @@
       }
     },
     "collectCoverageFrom": [
-      "src/*.{js,ts}"
-    ]
+      "src/*.{js,ts}",
+      "src/**/*.{js,ts}"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/boot.ts"
+    ],
+    "testRunner": "jest-jasmine2"
   },
   "prettier": {
     "semi": false,
@@ -85,8 +92,9 @@
   "devDependencies": {
     "@commitlint/cli": "^7.1.2",
     "@commitlint/config-conventional": "^7.1.2",
-    "@types/jest": "^23.3.2",
-    "@types/node": "^10.17.60",
+    "@types/jasmine-ajax": "^3.3.3",
+    "@types/jest": "^28.1.3",
+    "@types/node": "^18.0.0",
     "@types/nprogress": "^0.2.0",
     "@types/qs": "^6.9.7",
     "atob": "^2.1.2",
@@ -102,8 +110,12 @@
     "cz-conventional-changelog": "^2.1.0",
     "express": "^4.18.1",
     "husky": "^1.0.1",
-    "jest": "^23.6.0",
-    "jest-config": "^23.6.0",
+    "jasmine-ajax": "^4.0.0",
+    "jasmine-core": "^4.2.0",
+    "jest": "^28.1.1",
+    "jest-config": "^28.1.1",
+    "jest-environment-jsdom": "^28.1.1",
+    "jest-jasmine2": "^28.1.1",
     "lint-staged": "^8.0.0",
     "lodash.camelcase": "^4.3.0",
     "nprogress": "^0.2.0",
@@ -122,13 +134,13 @@
     "shelljs": "^0.8.3",
     "style-loader": "^3.3.1",
     "travis-deploy-once": "^5.0.9",
-    "ts-jest": "^23.10.2",
+    "ts-jest": "^28.0.5",
     "ts-loader": "^9.3.1",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-standard": "^8.0.1",
     "tslint-loader": "^3.5.4",
-    "typedoc": "^0.12.0",
+    "typedoc": "^0.21.10",
     "webpack": "^5.73.0",
     "webpack-dev-middleware": "^5.3.3",
     "webpack-hot-middleware": "^2.25.1"

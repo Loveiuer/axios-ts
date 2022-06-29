@@ -1,4 +1,3 @@
-import { HeadersType, Method } from '../types'
 
 const toString = Object.prototype.toString
 
@@ -6,9 +5,9 @@ export function isDate(val: any): val is Date {
   return toString.call(val) === '[object Date]'
 }
 
-export function isObject(val: any): val is Object {
-  return val !== null && typeof val === 'object'
-}
+// export function isObject(val: any): val is Object {
+//   return val !== null && typeof val === 'object'
+// }
 
 export function isPlainObject(val: any): val is Object {
   return toString.call(val) === '[object Object]'
@@ -34,7 +33,7 @@ export function isFormData(val: any): val is FormData {
 
 export function extend<T extends object, K extends object>(to: T, from: K): T & K {
   for (let key in from) {
-    ;(to as T & K)[key] = from[key] as any
+    ; (to as T & K)[key] = from[key] as any
   }
   return to as T & K
 }
@@ -60,11 +59,3 @@ export function deepMerge(...objs: any[]): any {
   return result
 }
 
-export function flattenHeaders(headers: HeadersType, method: Method): HeadersType {
-  headers = deepMerge(headers.common, headers[method], headers)
-  const methodsToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common']
-  methodsToDelete.forEach(method => {
-    delete headers[method]
-  })
-  return headers
-}

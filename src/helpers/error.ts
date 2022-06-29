@@ -2,6 +2,8 @@ import { AxiosRequestConfig, AxiosResponse } from '../types'
 
 class AxiosError extends Error {
   public isAxiosError: boolean
+
+  /* istanbul ignore next */
   constructor(
     message: string,
     public config: AxiosRequestConfig,

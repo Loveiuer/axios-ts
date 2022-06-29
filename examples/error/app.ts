@@ -25,8 +25,9 @@ setTimeout(() => {
         url: '/error/get'
     }).then((res) => {
         console.log(res)
-    }).catch((e) => {
-        console.log(e)
+    }).catch((e: AxiosError) => {
+        console.log(e.message);
+        console.log(e.request)
     })
 }, 5000)
 
